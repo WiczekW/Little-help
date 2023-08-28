@@ -35,7 +35,7 @@ class Look_for_prj():
         self.path_to_prod_fold = self.path_to_single_prj[0] + '\\Na produkcje\\'
         self.subproduction_folders = gb.glob(self.path_to_prod_fold + '\\*')
 
-        #sorting subproduction folders by date
+        #   sorting subproduction folders by date
         paths = self.subproduction_folders
         folders_creation_time = []
         for path in paths:

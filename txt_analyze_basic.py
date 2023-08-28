@@ -1,6 +1,8 @@
 import pandas as pd
 
-attr_from_txt = ['name' ,'status', 'quantity', 'conc_vol', 'steel_mass']
+attr_from_txt = ['name', 'status', 'quantity', 'conc_vol', 'steel_mass']
+
+
 def read_txt(path):
 
     with open(path, 'r') as file:
@@ -10,8 +12,8 @@ def read_txt(path):
             temp_txt_ds = pd.Series(temp_txt)
             columns = attr_from_txt
             data_set = [temp_txt_ds[2], temp_txt_ds[22], temp_txt_ds[6], temp_txt_ds[7], temp_txt_ds[10]]
-            data_set_types = []
-            #check and convert 3 last values - string data to float
+
+            #   check and convert 3 last values - string data to float
             data_set_types = []
             for i in data_set:
                 data_set_types.append(isinstance(i, str))
@@ -22,11 +24,8 @@ def read_txt(path):
                 else:
                     continue
 
-            #creation of output data frame
+            #   creation of output data frame
             output = pd.DataFrame(columns=columns, data=[data_set])
             return output
         else:
             pass
-
-#link = '\\\\dp.pekabex.poznan\\projekty2023\\NSGP - NDI Stocznia Gdynia\\Na produkcje\\2023-04-14_HP_BELKI_cz_I_GD\\B_2001.txt'
-#print(read_txt(link))

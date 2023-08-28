@@ -42,4 +42,4 @@ def c2_folder_extended(chosen_path):
     data_to_excel[list_of_columns].to_excel('Data_from_txt - CUSTOM ' + '.xlsx')
     print('Utworzono plik excel')
 
-c2_folder_extended('\\\\dp.pekabex.poznan/projekty2023\\PVBP - Prefabsystem Volvo Braas\\Na produkcje\\2023-08-18_GD_hus_G_slupy')
+#c2_folder_extended('\\\\dp.pekabex.poznan/projekty2023\\PVBP - Prefabsystem Volvo Braas\\Na produkcje\\2023-08-18_GD_hus_G_slupy')
