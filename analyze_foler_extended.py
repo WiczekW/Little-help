@@ -30,12 +30,14 @@ def c2_folder_extended(chosen_path):
     #   postproduction of data
     data_to_excel['conc_vol_global'] = data_to_excel['volume']*data_to_excel['quantity']
     data_to_excel['steel_mass_global'] = data_to_excel['steel_mass'] * data_to_excel['quantity']
-    data_to_excel['kg/m3'] =  data_to_excel['steel_mass']/data_to_excel['volume']
+    data_to_excel['kg/m3'] = data_to_excel['steel_mass']/data_to_excel['volume']
+    data_to_excel['mass'] = data_to_excel['volume'] * 2500
+    data_to_excel['assembly mass'] = data_to_excel['mass'] * 1.15
     data_to_excel.sort_values(['name'], inplace=True)
 
     list_of_columns = ['project', 'name', 'quantity', 'volume', 'steel_mass', 'kg/m3',
-                       'conc_vol_global', 'steel_mass_global', 'X-dim', 'Y-dim',
-                       'Z-dim', 'status', 'conc', 'exposure', 'fire resistance',
+                       'conc_vol_global', 'mass', 'assembly mass', 'steel_mass_global',
+                       'X-dim', 'Y-dim', 'Z-dim', 'status', 'conc', 'exposure', 'fire resistance',
                        'strands_bottom', 'strands_top'
                        ]
 

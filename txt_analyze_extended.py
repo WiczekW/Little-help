@@ -35,7 +35,7 @@ def read_txt_extended(path):
                 try:
                     output[column] = output[column].astype('float')
                 except ValueError:
-                    pass
+                    continue
 
             return output
         else:
