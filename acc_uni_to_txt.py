@@ -55,6 +55,7 @@ def acc_uni_to_txt(chosen_path):
                 splitted_line = clear_line.split('            ')
                 acc_name = splitted_line[1]
                 acc_name = acc_name.replace('©', 'e')
+                acc_name = acc_name.replace('ť', 'l')
                 acc_number = g[index_of_nr]
                 acc_number_cleared = acc_number.replace('\n', '').replace(' ', '')
                 # delete mistakes by counting tuple(1)

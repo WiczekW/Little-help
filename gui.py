@@ -54,9 +54,9 @@ btn_analyze_folder = tk.Button(root, text='Analizuj txt z katalogu', command=com
 btn_analyze_folder.pack()
 
 instructions3 = tk.Label(root, text='''
-AKCESORIA PLANBAR
+AKCESORIA+KRATY PLANBAR
 w tym samym folderze muszą się znaleźć:
- - TXT z Planbara
+ - TXT z GFix
  - pliki unitechnik''', justify='center')
 
 instructions3.pack()
