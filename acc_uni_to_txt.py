@@ -1,5 +1,5 @@
 import glob as gb
-
+from is_txt_oneline import is_txt_oneline
 
 def acc_uni_to_txt(chosen_path):
     path_to_glob_uni = chosen_path+'\\*.uni'
@@ -11,12 +11,13 @@ def acc_uni_to_txt(chosen_path):
 
     # get files to the list uni_encrytped files
     for path in uni_paths:
+        print(path)
         with open(path, mode='r') as file:
             temp_file = file
             temp_uni = list()
-            # read line by line 500 lines and save it to temp_uni
+            # read line by line 2000 lines and save it to temp_uni
             try:
-                for i in range(1500):
+                for i in range(2000):
                     single_line = temp_file.readline()
                     temp_uni.append(single_line)
                 unis_encrypted.append(temp_uni)
@@ -34,7 +35,6 @@ def acc_uni_to_txt(chosen_path):
             else:
                 uni_acc = uni_acc[1:]
         unis_acc.append(uni_acc)
-
     # remove lines after END
     for j in unis_acc:
         for line in j:
@@ -45,7 +45,7 @@ def acc_uni_to_txt(chosen_path):
                 break
             else:
                 continue
-    # find lines with acc and numbers and save it to tuple
+    # find lines with acc and numbers and save it to list
     for g in unis_acc:
         uni_acc_counted = list()
         for line in g:
@@ -71,7 +71,8 @@ def acc_uni_to_txt(chosen_path):
                     is_in = []
                     # countin accs with number
                     for k in uni_acc_counted:
-                        if k[0] == key_acc[0]:
+                        print('k: ', k, 'key_acc: ', key_acc)
+                        if k[0] == key_acc[0] and k[1] == key_acc[1]:
                             is_in.append(True)
                         else:
                             is_in.append(False)
@@ -102,6 +103,13 @@ def acc_uni_to_txt(chosen_path):
         txt_paths.append(path_to_txt)
 
     for i in txt_paths:
+        # check is file is oneline
+        condition = is_txt_oneline(i)
+        if condition == True:
+            pass
+        elif condition == False:
+            print('Pominięto, wygeneruj nowy txt: ', i)
+            continue
         s = '§'
         list_to_write = unis_acc_counted[txt_paths.index(i)]
         for j in list_to_write:
@@ -113,6 +121,7 @@ def acc_uni_to_txt(chosen_path):
     unis_girder = list()
     # remove lines before BRGIRDER and save unis_girder
     for i in unis_encrypted:
+
         uni_girder = i
         for line in uni_girder:
             if line[0:8] == 'BRGIRDER':
@@ -135,7 +144,7 @@ def acc_uni_to_txt(chosen_path):
 
     unis_girder_counted = []
 
-    #counting girders in unitechnik
+    # counting girders in unitechnik
     for i in unis_girder:
         uni_girder_counted = []
         for j in i:
@@ -158,9 +167,15 @@ def acc_uni_to_txt(chosen_path):
                         uni_girder_counted[index_of_exist_gird][2] += 1
         unis_girder_counted.append(uni_girder_counted)
 
-    #write girders to txt file
+    # write girders to txt file
 
     for i in txt_paths:
+        # check if txt has one line
+        condition = is_txt_oneline(i)
+        if condition == True:
+            pass
+        elif condition == False:
+            continue
         s = '§'
         list_to_write = unis_girder_counted[txt_paths.index(i)]
         for j in list_to_write:
@@ -173,5 +188,5 @@ def acc_uni_to_txt(chosen_path):
 
 
 
-#acc_uni_to_txt("C:\\Users\\wiktor.gajewski\\Desktop\\!bum\\testowe")
+#acc_uni_to_txt('C:\\Users\\wiktor.gajewski\\Desktop\\!bum\\gdsgds')
 

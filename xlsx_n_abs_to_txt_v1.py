@@ -94,6 +94,8 @@ def txt_gen(excel_path_from_gui):
     #   base crated as string
     base_converted = []
 
+
+
     #   change all to string and replace , with . and save to base converted
 
     for element in base:
@@ -118,3 +120,4 @@ def txt_gen(excel_path_from_gui):
                 file.write(var)
 
     print('Pliki TXT wygenerowane')
+
