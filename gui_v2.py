@@ -10,7 +10,7 @@ from acc_uni_to_txt import acc_uni_to_txt
 from xnat_v2 import df_integration, row_to_txt
 
 root = tk.Tk()
-root.title('LITTLE HELP v0.40')
+root.title('LITTLE HELP v0.41')
 
 def command_folder():
     path = filedialog.askdirectory(parent=root, title='Wybierz folder')
@@ -84,7 +84,7 @@ btn2 = tk.Button(c, text='C2 z katalogu', width=button_w,
 btn2.grid(column=1, row=3)
 
 btn3 = tk.Button(c, text='C2 z tematu', width=button_w,
-             height=button_h, command=root.destroy)
+             height=button_h, command=c2_prj)
 btn3.grid(column=1, row=4)
 
 btn4 = tk.Button(c, text='Generuj TXT v1', width=button_w,

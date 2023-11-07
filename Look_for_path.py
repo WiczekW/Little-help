@@ -6,11 +6,7 @@ import pandas as pd
 class Look_for_prj():
     def __init__(self):
 
-        #self.prj20 = gb.glob('\\\\dp.pekabex.poznan\\projekty2022\\*')
-        #self.prj21 = gb.glob('\\\\dp.pekabex.poznan\\projekty2022\\*')
-        #self.prj22 = gb.glob('\\\\dp.pekabex.poznan\\projekty2022\\*')
-        #self.prj23 = gb.glob('\\\\dp.pekabex.poznan\\projekty2023\\*')
-        #self.prj24 = gb.glob('\\\\dp.pekabex.poznan\\projekty2024\\*')
+
         self.path_to_prj = 'here will be path to single project folder'
         self.path_to_prod_fold = 'here will be path to probuction folder in project'
         self.subproduction_folders = 'here will be list to production folders in production'

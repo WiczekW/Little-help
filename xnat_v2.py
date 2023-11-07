@@ -7,11 +7,6 @@ import template_txt
 pd.options.display.max_columns = 150
 pd.options.display.max_colwidth = 150
 
-#path = 'C:\\Users\\wiktor.gajewski\\Desktop\\!bum\\DZIS'
-#path7 = 'C:\\Users\\wiktor.gajewski\\Desktop\\!bum\\DZIS\\TXT.abs'
-#path8 = 'C:\\Users\\wiktor.gajewski\\Desktop\\!bum\\DZIS\\txt_zbr_v2.xlsx'
-#path9 = 'C:\\Users\\wiktor.gajewski\\Desktop\\!bum\\DZIS'
-
 
 def df_integration(path_folder):
 
@@ -107,23 +102,7 @@ def row_to_txt(df_xnat, path_save):
 #print(row_to_txt(x, path9))
 
 
-def abs_creation(path4, path5, path9):
-    df_attr = xlsx_to_df(path4)
-    df_abs_integ = explode_abs_to_df(path5)
-    df_rebar_xlsx = xlxs_rebar_to_df(path9)
-    #print(df_attr)
-    #print(df_abs_integ)
-    #print(df_rebar_xlsx)
 
-    list_of_columns_attry = df_attr.columns.tolist().remove(0)
-    #print(list_of_columns_attry)
-    df_to_single_abs = df_attr.drop(labels=[list_of_columns_attry], axis='columns')
-    #print(df_to_single_abs)
-
-
-
-
-#y = abs_creation(path6, path7, path8)
 
 
 

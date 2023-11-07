@@ -37,14 +37,6 @@ def xlxs_rebar_to_df(path):
 
 
 
-
-#x = xlsx_to_df('C:\\Users\\wiktor.gajewski\\Desktop\\!bum\\DZIS\\txt_test_v3.xlsx')
-#print x
-#y = explode_abs('C:\\Users\\wiktor.gajewski\\Desktop\\!bum\\DZIS\\TXT.abs')
-#print(y[['Bar number', 'Bar length', 'Bar quantity', 'Bar weight', 'Bar diameter', 'Bar steel']])
-#z = xlxs_rebar_to_df('C:\\Users\\wiktor.gajewski\\Desktop\\!bum\\DZIS\\txt_zbr_v1.xlsx')
-#print(z)
-
 #filter = []
 #filter = y.duplicated().tolist()
 #print(y[filer])

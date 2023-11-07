@@ -1,13 +1,18 @@
 import glob as gb
 from is_txt_oneline import is_txt_oneline
+import convert_symbols
 
 def acc_uni_to_txt(chosen_path):
+
     path_to_glob_uni = chosen_path+'\\*.uni'
     uni_paths = gb.glob(path_to_glob_uni)
     unis_encrypted = list()
     unis_acc = list()
     uni_names = list()
     unis_acc_counted = []
+    # convert symbols
+    for i in uni_paths:
+        convert_symbols.convert_symbols(i)
 
     # get files to the list uni_encrytped files
     for path in uni_paths:
@@ -71,7 +76,7 @@ def acc_uni_to_txt(chosen_path):
                     is_in = []
                     # countin accs with number
                     for k in uni_acc_counted:
-                        print('k: ', k, 'key_acc: ', key_acc)
+                        #print('k: ', k, 'key_acc: ', key_acc)
                         if k[0] == key_acc[0] and k[1] == key_acc[1]:
                             is_in.append(True)
                         else:
@@ -188,5 +193,5 @@ def acc_uni_to_txt(chosen_path):
 
 
 
-#acc_uni_to_txt('C:\\Users\\wiktor.gajewski\\Desktop\\!bum\\gdsgds')
+
 
