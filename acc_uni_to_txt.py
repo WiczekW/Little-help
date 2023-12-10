@@ -1,21 +1,31 @@
 import glob as gb
-from is_txt_oneline import is_txt_oneline
+from is_txt_oneline import is_txt_oneline, is_empty_gird
 import convert_symbols
+import os
 
 def acc_uni_to_txt(chosen_path):
 
     path_to_glob_uni = chosen_path+'\\*.uni'
     uni_paths = gb.glob(path_to_glob_uni)
+    uni_paths_dec = list()
     unis_encrypted = list()
+    unis_encrypted_2 = list()
     unis_acc = list()
     uni_names = list()
     unis_acc_counted = []
+
     # convert symbols
     for i in uni_paths:
         convert_symbols.convert_symbols(i)
 
+    #complete list of unipaths_dec
+    for i in uni_paths:
+        temp_value = i.replace('.uni', "_dec.uni")
+        uni_paths_dec.append(temp_value)
+
+
     # get files to the list uni_encrytped files
-    for path in uni_paths:
+    for path in uni_paths_dec:
         print(path)
         with open(path, mode='r') as file:
             temp_file = file
@@ -26,6 +36,7 @@ def acc_uni_to_txt(chosen_path):
                     single_line = temp_file.readline()
                     temp_uni.append(single_line)
                 unis_encrypted.append(temp_uni)
+                unis_encrypted_2.append(temp_uni)
             except UnicodeDecodeError:
                 print('WYJATEK, nie wczytano :', path)
                 continue
@@ -50,6 +61,7 @@ def acc_uni_to_txt(chosen_path):
                 break
             else:
                 continue
+
     # find lines with acc and numbers and save it to list
     for g in unis_acc:
         uni_acc_counted = list()
@@ -124,8 +136,9 @@ def acc_uni_to_txt(chosen_path):
 
     # add girders to txt
     unis_girder = list()
+
     # remove lines before BRGIRDER and save unis_girder
-    for i in unis_encrypted:
+    for i in unis_encrypted_2:
 
         uni_girder = i
         for line in uni_girder:
@@ -176,7 +189,7 @@ def acc_uni_to_txt(chosen_path):
 
     for i in txt_paths:
         # check if txt has one line
-        condition = is_txt_oneline(i)
+        condition = is_empty_gird(i)
         if condition == True:
             pass
         elif condition == False:
@@ -188,9 +201,11 @@ def acc_uni_to_txt(chosen_path):
             with open(i, 'a', encoding='ANSI') as file:
                 file.write(str_to_write)
 
+    # delete temporary uni files
+    for i in uni_paths_dec:
+        os.remove(i)
 
-
-
+acc_uni_to_txt('C:\\Users\\wiktor.gajewski\\Desktop\\!bum\\2023-10-12 - KK_F_PL04_rev')
 
 
 
