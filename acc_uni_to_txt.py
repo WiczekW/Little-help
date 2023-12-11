@@ -1,12 +1,12 @@
 import glob as gb
-from is_txt_oneline import is_txt_oneline, is_empty_gird
+from is_txt_oneline import  is_empty_gird, is_empty_acc
 import convert_symbols
 import os
+import planbar_exposure_class
 
 def acc_uni_to_txt(chosen_path):
 
-    path_to_glob_uni = chosen_path+'\\*.uni'
-    uni_paths = gb.glob(path_to_glob_uni)
+
     uni_paths_dec = list()
     unis_encrypted = list()
     unis_encrypted_2 = list()
@@ -14,15 +14,32 @@ def acc_uni_to_txt(chosen_path):
     uni_names = list()
     unis_acc_counted = []
 
+    # clear old decrypted unis
+    path_to_old_unis = chosen_path+'\\*_dec.uni'
+    old_unis = gb.glob(path_to_old_unis)
+    for i in old_unis:
+        os.remove(i)
+
+    # search for actal unis
+    path_to_glob_uni = chosen_path + '\\*.uni'
+    uni_paths = gb.glob(path_to_glob_uni)
+
     # convert symbols
     for i in uni_paths:
         convert_symbols.convert_symbols(i)
 
-    #complete list of unipaths_dec
+    # complete list of unipaths_dec
     for i in uni_paths:
         temp_value = i.replace('.uni', "_dec.uni")
         uni_paths_dec.append(temp_value)
 
+    # wrtie uni exp class to txt and make a list of txt files
+    txt_paths = list()
+    for i in uni_paths:
+        txt_paths.append(i.replace('.uni', '.txt'))
+
+    for i in txt_paths:
+        planbar_exposure_class.exp_class_from_uni(i)
 
     # get files to the list uni_encrytped files
     for path in uni_paths_dec:
@@ -61,6 +78,9 @@ def acc_uni_to_txt(chosen_path):
                 break
             else:
                 continue
+
+    # rebuild of cut unis_encrypted
+    unis_encrypted = unis_encrypted_2
 
     # find lines with acc and numbers and save it to list
     for g in unis_acc:
@@ -121,11 +141,11 @@ def acc_uni_to_txt(chosen_path):
 
     for i in txt_paths:
         # check is file is oneline
-        condition = is_txt_oneline(i)
+        condition = is_empty_acc(i)
         if condition == True:
             pass
         elif condition == False:
-            print('Pominięto, wygeneruj nowy txt: ', i)
+            print('Pominięto(akcesoria), wygeneruj nowy txt: ', i)
             continue
         s = '§'
         list_to_write = unis_acc_counted[txt_paths.index(i)]
@@ -193,6 +213,7 @@ def acc_uni_to_txt(chosen_path):
         if condition == True:
             pass
         elif condition == False:
+            print('Pominięto(kratownica), wygeneruj nowy txt: ', i)
             continue
         s = '§'
         list_to_write = unis_girder_counted[txt_paths.index(i)]
@@ -201,11 +222,13 @@ def acc_uni_to_txt(chosen_path):
             with open(i, 'a', encoding='ANSI') as file:
                 file.write(str_to_write)
 
+
+
     # delete temporary uni files
     for i in uni_paths_dec:
         os.remove(i)
 
-acc_uni_to_txt('C:\\Users\\wiktor.gajewski\\Desktop\\!bum\\2023-10-12 - KK_F_PL04_rev')
+
 
 
 
