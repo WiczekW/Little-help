@@ -1,5 +1,10 @@
 
 def is_txt_oneline(path):
+    """
+    Checks if the txt file is one line of text.
+    :param path: path to txt file as a string
+    :return: bool
+    """
     with open(path, 'r') as file:
         condition = len(file.readlines())
         if condition > 1:
@@ -8,13 +13,14 @@ def is_txt_oneline(path):
             return True
 
 
-
-def is_empty_acc(path):
+def is_empty_acc(path: str) -> bool:
+    """
+    Function to check if analyzed txt file includes accessories
+    :param path: path to txt file as a string
+    :return: bool
+    """
     with open(path, 'r') as file:
         analyzed_file = file.readlines()
-        condition = [0, 0]
-
-        # check if there are acc or girders in txt
         if len(analyzed_file) >= 1:
             preCondition_list = list()
             for i in analyzed_file[1:]:
@@ -25,12 +31,14 @@ def is_empty_acc(path):
             return True
 
 
-def is_empty_gird(path):
+def is_empty_gird(path: str) -> bool:
+    """
+    Function to check to analyze if txt file includes girders, by checking existance of lines starting with §KT.
+    :param path: path to txt file as a string
+    :return: bool
+    """
     with open(path, 'r') as file:
         analyzed_file = file.readlines()
-        condition = [0, 0]
-
-        # check if there are acc or girders in txt
         if len(analyzed_file) >= 1:
             preCondition_list = list()
             for i in analyzed_file[1:]:
@@ -41,6 +49,3 @@ def is_empty_gird(path):
                 return True
         else:
             return True
-
-
-

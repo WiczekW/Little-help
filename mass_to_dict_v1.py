@@ -1,5 +1,9 @@
-#   calculated from bvbs file
 def mass_to_dict(name_of_abs):
+    """
+    Function to convert mass from abs file to mass sorted by diameters.
+    :param name_of_abs:
+    :return:
+    """
     
     #   import data from abs file
     full_name_of_abs = str(name_of_abs)+'.abs'

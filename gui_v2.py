@@ -39,11 +39,6 @@ def show_info():
     popup.title('Info')
     label = tk.Label(popup, text=template_info.info_text, justify='left')
     label.pack()
-    #image = Image.open('dim.png')
-    #image_tk=ImageTk.PhotoImage(image)
-    #image_label = tk.Label(popup, image=image_tk)
-    #image_label.image = image_tk
-    #image_label.pack()
     #   text
     signature = tk.Label(popup, text='Małe pomoce - Wiktor Gajewski 2023', height=1, width=40)
     signature.pack()

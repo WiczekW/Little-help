@@ -3,31 +3,32 @@ import mass_to_dict_v1
 import dim_correction
 
 
-def txt_gen(excel_path_from_gui):
-#   input of excel path
+def txt_gen(excel_path_from_gui: str) -> str:
+    """
+    Function to generate a txt file with attributes of precast elements. Data to generate a txt file is stored in excel
+    file and bvbs files. BVBS files should be stored in the same folder as excel.
+    Excel file it's a raport exported from allplan. In case of findig old files, function will erase those.
+    Function views messages in console of program.
+    :param excel_path_from_gui: string to excel file exported from allplan
+    :return: string with success message
+    """
     excel_path = str(excel_path_from_gui)
-#   adjusting path of file
     excel_path = excel_path.replace('"', '')
 
-#   abs path from excel path
+
     abs_location = excel_path
     while abs_location[-1] != '/':
          abs_location = abs_location[:-1]
 
-
-#   load of excel file
     excel = openpyxl.load_workbook(excel_path)
     arkusz = excel['txt_allplan_v17_S_czysty']
 
-#   input data to excel
     first_row = 3
     base = list()
     z = '§'
 
-#   import data from excel
     while arkusz.cell(row=first_row, column=1).value == '§':
         imported_row = list(arkusz.rows)[first_row-1]
-    #   from tuple to list
         imported_row_list = []
         for item in imported_row:
             item_converted = item.value
@@ -36,11 +37,9 @@ def txt_gen(excel_path_from_gui):
         base.append(imported_row_list)
         print('wiersz nr', first_row, 'wczytany')
         first_row += 1
-  
-#   add mass of steel
+
     for element in base:
         try:
-         
             rebar_by_diameter = mass_to_dict_v1.mass_to_dict((abs_location+element[3]))
             element[19] = rebar_by_diameter['total']
             element[131] = rebar_by_diameter[4]
@@ -65,12 +64,10 @@ def txt_gen(excel_path_from_gui):
             print('Nie udało się wczytać mas zbrojenia z plików ABS dla ', str(element[3]),
                   '''Upewnij się, że są w tym samym folderze co excel.''')
 
-    #   dim correction
     types_to_correct = ['belka zbrojona szalunek', 'sciana pelna szalunek', 'sciana 3 warstwowa szalunek']
 
     for element in base:
         if element[299] in types_to_correct:
-
             #   tuple generator (length, width, height) width - smallest, length - biggest
             dimensions_tuple = dim_correction.dim_correction(element)
 
@@ -80,7 +77,6 @@ def txt_gen(excel_path_from_gui):
 
             print('Poprawiono wymiary w ', str(element[3]))
 
-    #   clear of the old txt files
     for element in base:
         name_of_element = str(element[3])
         name_of_txt = name_of_element + '.txt'
@@ -88,11 +84,8 @@ def txt_gen(excel_path_from_gui):
         with open(path_of_txt, 'w', encoding='ANSI') as file:
             file.write('')
 
-    #   base crated as string
     base_converted = []
 
-
-    #   change all to string and replace , with . and save to base converted
 
     for element in base:
         element_list = []
@@ -104,7 +97,6 @@ def txt_gen(excel_path_from_gui):
 
         base_converted.append(element_list)
 
-    #   creation of txt files
     for element in base_converted:
         print('Generowanie TXT dla ' + str(element[3]))
         for var in element:
@@ -115,4 +107,5 @@ def txt_gen(excel_path_from_gui):
                 file.write(var)
 
     print('Pliki TXT wygenerowane')
+    return 'Success!'
 
