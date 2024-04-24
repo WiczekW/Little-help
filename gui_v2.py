@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog
-from PIL import Image, ImageTk
+# from PIL import Image, ImageTk
 import template_info
 from analyze_prj import c2_prj
 from analyze_folder import c2_folder

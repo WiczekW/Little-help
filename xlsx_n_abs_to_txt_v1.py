@@ -11,9 +11,7 @@ def txt_gen(excel_path_from_gui):
 
 #   abs path from excel path
     abs_location = excel_path
-
     while abs_location[-1] != '/':
-
          abs_location = abs_location[:-1]
 
 
@@ -33,7 +31,6 @@ def txt_gen(excel_path_from_gui):
         imported_row_list = []
         for item in imported_row:
             item_converted = item.value
-                            
             imported_row_list.append(item_converted)
         
         base.append(imported_row_list)
@@ -95,14 +92,12 @@ def txt_gen(excel_path_from_gui):
     base_converted = []
 
 
-
     #   change all to string and replace , with . and save to base converted
 
     for element in base:
         element_list = []
 
         for var in element:
-
             var = str(var)
             var = var.replace('.', ',')
             element_list.append(var)
