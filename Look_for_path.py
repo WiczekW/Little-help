@@ -4,17 +4,25 @@ import pandas as pd
 
 
 class Look_for_prj():
+    """
+    Class to handle looking for path of company server
+    """
     def __init__(self):
+        """
 
+        """
+        self.path_to_prj = str()
+        self.path_to_prod_fold = str()
+        self.subproduction_folders = str()
 
-        self.path_to_prj = 'here will be path to single project folder'
-        self.path_to_prod_fold = 'here will be path to probuction folder in project'
-        self.subproduction_folders = 'here will be list to production folders in production'
-
-    def single_prj(self, shortcut):
-
+    def single_prj(self, shortcut: str) -> list:
+        """
+        Function to find and sort paths to production folders of project.
+        :param shortcut: of a project as a string
+        :return: list of paths to production folders
+        """
         shortcut = shortcut.upper()
-        if shortcut[-1] == 'Q':
+        if shortcut[-1] == 'R':
             self.path_to_single_prj = gb.glob('\\\\dp.pekabex.poznan\\projekty2024\\' + shortcut + '*')
         elif shortcut[-1] == 'P':
             self.path_to_single_prj = gb.glob('\\\\dp.pekabex.poznan\\projekty2023\\' + shortcut + '*')
@@ -31,7 +39,6 @@ class Look_for_prj():
         self.path_to_prod_fold = self.path_to_single_prj[0] + '\\Na produkcje\\'
         self.subproduction_folders = gb.glob(self.path_to_prod_fold + '\\*')
 
-        #   sorting subproduction folders by date
         paths = self.subproduction_folders
         folders_creation_time = []
         for path in paths:
@@ -42,10 +49,13 @@ class Look_for_prj():
         series_folders_creation_time.sort_index(inplace=True)
         sorted_paths = series_folders_creation_time.tolist()
         self.subproduction_folders = sorted_paths
+        return sorted_paths
 
-
-
-    def search_txt(self):
+    def search_txt(self) -> list:
+        """
+        Funcion to find paths of all txt files from list of subproduction folders.
+        :return: paths to txt files
+        """
         paths = self.subproduction_folders
         list_of_txt = []
         for path in paths:
@@ -54,7 +64,12 @@ class Look_for_prj():
                 list_of_txt.append(txt_path)
         return list_of_txt
 
-    def search_txt_selected_folder(self, path):
+    def search_txt_selected_folder(self, path: str) -> list:
+        """
+        Searches for txt files in folder from selected path.
+        :param path: path to folder as a string
+        :return: list of paths to txt files from selected folder
+        """
         self.subproduction_folders = [path]
         paths = self.subproduction_folders
         list_of_txt = []
