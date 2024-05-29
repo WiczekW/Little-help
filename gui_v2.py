@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import filedialog
-# from PIL import Image, ImageTk
 import template_info
 from analyze_prj import c2_prj
 from analyze_folder import c2_folder
@@ -8,9 +7,13 @@ from analyze_foler_extended import c2_folder_extended
 from xlsx_n_abs_to_txt_v1 import txt_gen
 from acc_uni_to_txt import acc_uni_to_txt
 from xnat_v2 import df_integration, row_to_txt
+from acc_from_raport.matrix_to_csv import import_line_acc
+from acc_from_raport.acc_raport import acc_raport_to_list
+from acc_from_raport.write_acc_to_txt import TxtWriter
 
 root = tk.Tk()
-root.title('LITTLE HELP v0.42')
+root.title('LITTLE HELP v0.44')
+
 
 def command_folder():
     path = filedialog.askdirectory(parent=root, title='Wybierz folder')
@@ -26,21 +29,43 @@ def command_txt_generate():
     path = filedialog.askopenfile(parent=root, mode='r', title='Wybierz plik')
     txt_gen(path.name)
 
+
 def command_acc_uni_to_txt():
     path = filedialog.askdirectory(parent=root, title='Wybierz folder')
     acc_uni_to_txt(path)
+
 
 def command_txt_generate_v2():
     path = filedialog.askdirectory(parent=root, title='Wybierz folder')
     row_to_txt(df_integration(path), path)
 
+
+def execute_import_line_acc():
+    path = filedialog.askopenfile(parent=root, mode='r', title='Wybierz plik')
+    import_line_acc(path.name)
+
+
+def add_acc_raport_to_txt():
+    path = filedialog.askopenfile(parent=root, mode='r', title='Wybierz plik')
+    list_of_acc = acc_raport_to_list(path.name)
+    if list_of_acc is False:
+        return False
+    txt_write = TxtWriter(list_of_acc, path.name)
+    txt_write.search_for_elements()
+    txt_write.write_to_txt()
+
+
+
+
 def show_info():
     popup = tk.Toplevel(root)
     popup.title('Info')
+
     label = tk.Label(popup, text=template_info.info_text, justify='left')
     label.pack()
+
     #   text
-    signature = tk.Label(popup, text='Małe pomoce - Wiktor Gajewski 2023', height=1, width=40)
+    signature = tk.Label(popup, text='Małe pomoce - Wiktor Gajewski 2024', height=1, width=40)
     signature.pack()
     close_btn = tk.Button(popup, text='Zamknij', command=popup.destroy)
     close_btn.pack()
@@ -86,15 +111,15 @@ btn4 = tk.Button(c, text='Generuj TXT v1', width=button_w,
              height=button_h, command=command_txt_generate)
 btn4.grid(column=2, row=2)
 
-btn5 = tk.Button(c, text='Dodaj akc do TXT', width=button_w,
+btn5 = tk.Button(c, text='Dodaj akcesoria - uni', width=button_w,
              height=button_h, command=command_acc_uni_to_txt)
 btn5.grid(column=3, row=2)
 
-btn6 = tk.Button(c, text='INFO', width=button_w,
+btn6 = tk.Button(c, text='Info', width=button_w,
              height=button_h, command=show_info)
 btn6.grid(column=4, row=3)
 
-btn7 = tk.Button(c, text='ZAMKNIJ', width=button_w,
+btn7 = tk.Button(c, text='Zamknij', width=button_w,
              height=button_h, command=root.destroy)
 btn7.grid(column=4, row=4)
 
@@ -102,5 +127,13 @@ btn7 = tk.Button(c, text='Generuj TXT v2', width=button_w,
              height=button_h, command=command_txt_generate_v2)
 btn7.grid(column=2, row=3)
 
+btn8 = tk.Button(c, text='Dodaj akcesoria - excel', width=button_w,
+             height=button_h, command=add_acc_raport_to_txt)
+btn8.grid(column=2, row=4)
+
+btn9 = tk.Button(c, text='Zaimportuj matrycę', width=button_w,
+             height=button_h, command=execute_import_line_acc)
+btn9.grid(column=4, row=2)
 
 root.mainloop()
+
