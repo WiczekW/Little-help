@@ -1,7 +1,19 @@
 import os
-from Production_analyzer.is_txt_oneline import is_txt_oneline
 import re
 
+
+def is_txt_oneline(path):
+    """
+    Checks if the txt file is one line of text.
+    :param path: path to txt file as a string
+    :return: bool
+    """
+    with open(path, 'r') as file:
+        condition = len(file.readlines())
+        if condition > 1:
+            return False
+        else:
+            return True
 
 
 class TxtWriter:
@@ -57,10 +69,6 @@ class TxtWriter:
 
 
 if __name__ == '__main__':
-        path = "C:\\Users\\Wik\\Desktop\\dp\\accec\\Elementy_gotowe_jp.xlsx"
-        x = TxtWriter(acc_raport_to_list(path), path)
-        x.search_for_elements()
-        x.write_to_txt()
-
+    pass
 
 

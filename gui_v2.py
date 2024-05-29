@@ -3,6 +3,7 @@ from tkinter import filedialog
 import template_info
 from analyze_prj import c2_prj
 from analyze_folder import c2_folder
+from ins import validate, date, start_date, end_date
 from analyze_foler_extended import c2_folder_extended
 from xlsx_n_abs_to_txt_v1 import txt_gen
 from acc_uni_to_txt import acc_uni_to_txt
@@ -11,8 +12,10 @@ from acc_from_raport.matrix_to_csv import import_line_acc
 from acc_from_raport.acc_raport import acc_raport_to_list
 from acc_from_raport.write_acc_to_txt import TxtWriter
 
+
 root = tk.Tk()
 root.title('LITTLE HELP v0.44')
+
 
 
 def command_folder():
@@ -135,5 +138,11 @@ btn9 = tk.Button(c, text='Zaimportuj matrycę', width=button_w,
              height=button_h, command=execute_import_line_acc)
 btn9.grid(column=4, row=2)
 
-root.mainloop()
 
+if validate(date, start_date, end_date):
+   pass
+else:
+    root.destroy()
+
+
+root.mainloop()
