@@ -13,7 +13,7 @@ def acc_raport_to_list(chosen_path: str) -> list|bool:
     :return: list of tuples with attributes of accessories in precast elements
     """
     wb = openpyxl.load_workbook(chosen_path)
-    sheet = wb['Elementy_gotowe']
+    sheet = wb['Allplan_elementy_gotowe']
     list_of_acc = list()
     all_rows = list(sheet.rows)[7:]
 
@@ -24,7 +24,7 @@ def acc_raport_to_list(chosen_path: str) -> list|bool:
         return False
 
     for row in all_rows:
-        if row[2].value is not None and row[2].value != "BLOK":
+        if row[2].value is not None and row[3].value != "BLOK":
             pattern_to_length = re.compile(r'(?<==)\d+')
             pattern_to_acc = re.compile('liniowy')
             catalog = row[6].value
