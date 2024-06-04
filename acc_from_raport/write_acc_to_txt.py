@@ -46,10 +46,14 @@ class TxtWriter:
         for element in self.list_of_elements:
             path_to_txt = self.path_to_dir + '\\\\' + element + '.txt'
 
-            if is_txt_oneline(path_to_txt):
-                pass
-            else:
-                print(f'Pominięto txt dla {element}. Plik ma więcej niż jedną linię.')
+            try:
+                if is_txt_oneline(path_to_txt):
+                    pass
+                else:
+                    print(f'Pominięto txt dla {element}. Plik ma więcej niż jedną linię.')
+                    continue
+            except FileNotFoundError:
+                print(f'Nie odnaleziono pliku txt dla elementu {element}')
                 continue
 
             with open(path_to_txt, 'a+', encoding='ANSI') as file:
@@ -66,9 +70,6 @@ class TxtWriter:
                         continue
                 print(f'Dodano akcesoria do elementu {element}')
 
-
-
 if __name__ == '__main__':
     pass
-
 

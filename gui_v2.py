@@ -14,41 +14,62 @@ from acc_from_raport.write_acc_to_txt import TxtWriter
 
 
 root = tk.Tk()
-root.title('LITTLE HELP v0.44')
+root.title('LITTLE HELP v0.45')
 
 
 
 def command_folder():
+    """
+    Button function to choose folder and initialize c2_folder function.
+    """
     path = filedialog.askdirectory(parent=root, title='Wybierz folder')
     c2_folder(path)
 
 
 def command_folder_extended():
+    """
+    Button function to choose folder and initialize c2_folder_extended function.
+    """
     path = filedialog.askdirectory(parent=root, title='Wybierz folder')
     c2_folder_extended(path)
 
 
 def command_txt_generate():
+    """
+    Button function to choose file and initialize generation of txt files.
+    """
     path = filedialog.askopenfile(parent=root, mode='r', title='Wybierz plik')
     txt_gen(path.name)
 
 
 def command_acc_uni_to_txt():
+    """
+    Button function to choose folder and initialize addition of accessories to txt from uni files.
+    """
     path = filedialog.askdirectory(parent=root, title='Wybierz folder')
     acc_uni_to_txt(path)
 
 
 def command_txt_generate_v2():
+    """
+    Button function to choose file and initialize generation of txt files.
+    """
     path = filedialog.askdirectory(parent=root, title='Wybierz folder')
     row_to_txt(df_integration(path), path)
 
 
 def execute_import_line_acc():
+    """
+    Button function to choose file and import line accessories as csv
+    """
     path = filedialog.askopenfile(parent=root, mode='r', title='Wybierz plik')
     import_line_acc(path.name)
 
 
 def add_acc_raport_to_txt():
+    """
+    Button function to choose file and add accessories from excel to txt files
+    """
     path = filedialog.askopenfile(parent=root, mode='r', title='Wybierz plik')
     list_of_acc = acc_raport_to_list(path.name)
     if list_of_acc is False:
@@ -61,6 +82,9 @@ def add_acc_raport_to_txt():
 
 
 def show_info():
+    """
+    Button function to view documentation
+    """
     popup = tk.Toplevel(root)
     popup.title('Info')
 
