@@ -3,7 +3,6 @@ from tkinter import filedialog
 import template_info
 from analyze_prj import c2_prj
 from analyze_folder import c2_folder
-from ins import validate, date, start_date, end_date
 from analyze_foler_extended import c2_folder_extended
 from xlsx_n_abs_to_txt_v1 import txt_gen
 from acc_uni_to_txt import acc_uni_to_txt
@@ -161,12 +160,6 @@ btn8.grid(column=2, row=4)
 btn9 = tk.Button(c, text='Zaimportuj matrycę', width=button_w,
              height=button_h, command=execute_import_line_acc)
 btn9.grid(column=4, row=2)
-
-
-if validate(date, start_date, end_date):
-   pass
-else:
-    root.destroy()
 
 
 root.mainloop()
